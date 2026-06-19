@@ -1,0 +1,13 @@
+.logo {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 19px;
+  font-weight: 700;
+  color: #fff;
+  letter-spacing: 0.3px;
+  text-decoration: none;
+}
+
+.pro { color: #fff; font-weight: 700; }
+.nat { color: #5cb85c; font-weight: 800; }
