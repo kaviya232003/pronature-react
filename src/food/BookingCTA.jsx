@@ -13,7 +13,7 @@ export default function BookingCTA() {
         Private dining & event catering also available.
       </p>
       <div className={styles.btns}>
-        <button className={styles.primary}>Book A Table</button>
+       
         <button className={styles.secondary}>Call Us: +1 800 PRO-NATU</button>
       </div>
     </section>

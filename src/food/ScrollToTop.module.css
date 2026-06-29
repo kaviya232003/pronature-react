@@ -1,6 +1,32 @@
 .btn {
   position: fixed;
-  bottom: 30px;
+  bottom: 160px;
+  right: 30px;
+  width: 44px;
+  height: 44px;
+  background: #e8601c;
+  border: none;
+  border-radius: 50%;
+  color: #fff;
+  font-size: 18px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.3s, transform 0.3s;
+  z-index: 99;
+}
+
+.btn.visible {
+  opacity: 1;
+  pointer-events: all;
+}
+
+.btn:hover { transform: translateY(-3px); }
+.btn {
+  position: fixed;
+  bottom: 100px;
   right: 30px;
   width: 44px;
   height: 44px;

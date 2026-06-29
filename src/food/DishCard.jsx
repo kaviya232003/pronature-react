@@ -12,11 +12,14 @@ function Stars({ rating }) {
   );
 }
 
-export default function DishCard({ item }) {
+export default function DishCard({ item, requireAuth }) {
   const [added, setAdded] = useState(false);
   const { addItem } = useCart();
 
   const handleAdd = () => {
+    // Check login first
+    if (requireAuth && !requireAuth()) return;
+
     addItem(item);
     setAdded(true);
     setTimeout(() => setAdded(false), 1200);
@@ -24,8 +27,6 @@ export default function DishCard({ item }) {
 
   return (
     <div className={styles.card}>
-      {item.badge && <span className={styles.badge}>{item.badge}</span>}
-
       <div className={styles.imgWrap}>
         <img className={styles.img} src={item.img} alt={item.name} />
       </div>

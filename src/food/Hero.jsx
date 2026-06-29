@@ -1,81 +1,108 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import styles from './Hero.module.css';
 
 export default function Hero() {
-  const scrollToMenu = () =>
-    document.getElementById('menu')?.scrollIntoView({ behavior: 'smooth' });
+
+  useEffect(() => {
+    const els = document.querySelectorAll('[data-fadein]');
+    els.forEach((el, i) => {
+      setTimeout(() => {
+        el.style.opacity = '1';
+        el.style.transform = 'translateY(0)';
+      }, i * 200);
+    });
+  }, []);
 
   return (
     <section className={styles.hero}>
-      <div className={styles.left}>
-        <div className={styles.badge}>
-          <span className={styles.dot} />
-          Now Open — Fresh Everyday
-        </div>
+      <video
+        className={styles.bgVideo}
+        autoPlay
+        loop
+        muted
+        playsInline
+      >
+        <source src="/ck.mp4" type="video/mp4" />
+      </video>
 
-        <h1 className={styles.heading}>
-          The Best Quality<br />
-          <span className={styles.green}>Food</span> Of Your<br />
-          Choice.
-        </h1>
+      <div className={styles.overlay} />
 
-        <p className={styles.desc}>
-          Discover a dining experience crafted with the finest natural
-          ingredients. Every dish tells a story of freshness, flavor, and care.
-        </p>
+      {/* Vertical brand text on right side */}
+      <div className={styles.verticalBrand}>
+        {'FRESHEATS'.split('').map((c, i) => (
+          <span key={i}>{c}</span>
+        ))}
+      </div>
 
-        <div className={styles.btns}>
-          <button className={styles.viewBtn} onClick={scrollToMenu}>
-            View Menu
-          </button>
-          <button className={styles.watchBtn}>
-            <span className={styles.playIcon}>
-              <svg width="14" height="14" viewBox="0 0 24 24" fill="#fff">
-                <polygon points="5,3 19,12 5,21" />
-              </svg>
-            </span>
-            Watch Story
-          </button>
-        </div>
+      <div className={styles.content}>
+        <div className={styles.left}>
 
-        <div className={styles.stats}>
-          <div className={styles.stat}>
-            <span className={styles.statNum}>12<span className={styles.accent}>k+</span></span>
-            <span className={styles.statLabel}>Happy Customers</span>
+          {/* Top label with lines */}
+          <div data-fadein className={styles.topLabel}>
+            <span className={styles.line} />
+            Now Open — Fresh Everyday
+            <span className={styles.line} />
           </div>
-          <div className={styles.stat}>
-            <span className={styles.statNum}>4<span className={styles.accent}>.9</span></span>
-            <span className={styles.statLabel}>Average Rating</span>
+
+          {/* Badge with dot */}
+          <div data-fadein className={styles.badge}>
+            <span className={styles.dot} />
+            Fine Dining · Natural Ingredients · Made Fresh Daily
           </div>
-          <div className={styles.stat}>
-            <span className={styles.statNum}>80<span className={styles.accent}>+</span></span>
-            <span className={styles.statLabel}>Menu Items</span>
+
+          {/* Main heading — original wording */}
+          <h1 data-fadein className={styles.heading}>
+            The Best Quality<br />
+            <span className={styles.green}>Food</span> Of Your<br />
+            Choice.
+          </h1>
+
+          {/* Description — original wording */}
+          <p data-fadein className={styles.desc}>
+            Discover a dining experience crafted with the finest natural
+            ingredients. Every dish tells a story of freshness, flavor, and care.
+          </p>
+
+          {/* CTA buttons */}
+          <div data-fadein className={styles.ctaRow}>
+            <a href="#menu" className={styles.btnPrimary}>
+              Explore Menu
+            </a>
+            <button
+              className={styles.btnSecondary}
+              onClick={() => document.dispatchEvent(new CustomEvent('openBooking'))}
+            >
+              Reserve a Table
+            </button>
           </div>
+
+          {/* Stats */}
+          <div data-fadein className={styles.stats}>
+            <div className={styles.stat}>
+              <span className={styles.statNum}>12<span className={styles.accent}>k+</span></span>
+              <span className={styles.statLabel}>Happy Customers</span>
+            </div>
+            <div className={styles.statDivider} />
+            <div className={styles.stat}>
+              <span className={styles.statNum}>4<span className={styles.accent}>.9</span></span>
+              <span className={styles.statLabel}>Average Rating</span>
+            </div>
+            <div className={styles.statDivider} />
+            <div className={styles.stat}>
+              <span className={styles.statNum}>80<span className={styles.accent}>+</span></span>
+              <span className={styles.statLabel}>Menu Items</span>
+            </div>
+          </div>
+
         </div>
       </div>
 
-      <div className={styles.right}>
-        <div className={styles.glowCircle} />
-        <img
-          className={styles.dishMain}
-          src="https://images.unsplash.com/photo-1585937421612-70a008356fbe?w=600&q=85"
-          alt="Featured dish"
-        />
-        <div className={`${styles.floatingTag} ${styles.tagTop}`}>
-          <span className={styles.tagIcon}>🥗</span>
-          <div>
-            <div className={styles.tagTitle}>Fresh Salads</div>
-            <div className={styles.tagSub}>Made daily</div>
-          </div>
-        </div>
-        <div className={`${styles.floatingTag} ${styles.tagBot}`}>
-          <span className={styles.tagIcon}>⭐</span>
-          <div>
-            <div className={styles.tagTitle}>Top Rated</div>
-            <div className={styles.tagSub}>4.9 / 5.0</div>
-          </div>
-        </div>
+      {/* Scroll hint at bottom */}
+      <div className={styles.scrollHint}>
+        <div className={styles.scrollLine} />
+        <span>Scroll</span>
       </div>
+
     </section>
   );
 }

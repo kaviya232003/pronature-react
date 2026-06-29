@@ -223,3 +223,274 @@
 @media (max-width: 480px) {
   .sidebar { width: 100vw; max-width: 100vw; }
 }
+/* Checkout form */
+.checkoutForm {
+  padding: 1rem;
+  overflow-y: auto;
+  flex: 1;
+}
+
+.sectionLabel {
+  font-size: 0.72rem;
+  font-weight: 700;
+  color: #4ade80;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  margin: 1.25rem 0 0.75rem;
+}
+
+.formGroup {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  margin-bottom: 0.85rem;
+}
+
+.formLabel {
+  font-size: 0.78rem;
+  color: rgba(255, 255, 255, 0.55);
+  font-weight: 500;
+}
+
+.formInput {
+  background: #242424;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  color: #fff;
+  padding: 0.6rem 0.85rem;
+  border-radius: 0.65rem;
+  font-size: 0.88rem;
+  outline: none;
+  width: 100%;
+  box-sizing: border-box;
+  transition: border-color 0.2s;
+}
+
+.formInput:focus { border-color: #4ade80; }
+.formInput::placeholder { color: rgba(255, 255, 255, 0.2); }
+
+.inputError { border-color: #ef4444 !important; }
+
+.errMsg {
+  font-size: 0.72rem;
+  color: #f87171;
+}
+
+.formRow {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.75rem;
+}
+
+/* Payment tabs */
+.paymentTabs {
+  display: flex;
+  gap: 0.5rem;
+  margin-bottom: 1rem;
+}
+
+.payTab {
+  flex: 1;
+  padding: 0.5rem;
+  background: #242424;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  color: rgba(255, 255, 255, 0.6);
+  border-radius: 0.65rem;
+  font-size: 0.82rem;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.payActive {
+  background: rgba(74, 222, 128, 0.12);
+  border-color: #4ade80;
+  color: #4ade80;
+  font-weight: 600;
+}
+
+.payNote {
+  font-size: 0.85rem;
+  color: rgba(255, 255, 255, 0.55);
+  background: #1f1f1f;
+  padding: 0.75rem 1rem;
+  border-radius: 0.65rem;
+  margin-bottom: 1rem;
+}
+
+/* Order summary in checkout */
+.orderSummary {
+  background: #1a1a1a;
+  border-radius: 0.75rem;
+  padding: 0.85rem 1rem;
+  margin: 1rem 0;
+}
+/* ---------- Order tracker ---------- */
+.trackerWrap {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 2rem 1.25rem;
+  height: 100%;
+}
+
+.trackerCheck {
+  width: 64px;
+  height: 64px;
+  border-radius: 50%;
+  background: rgba(74, 222, 128, 0.15);
+  border: 2px solid #4ade80;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.8rem;
+  color: #4ade80;
+  margin-bottom: 1rem;
+  animation: popIn 0.4s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+@keyframes popIn {
+  from { transform: scale(0.5); opacity: 0; }
+  to   { transform: scale(1);   opacity: 1; }
+}
+
+.trackerTitle {
+  font-size: 1.2rem;
+  font-weight: 700;
+  color: #fff;
+  margin-bottom: 4px;
+}
+
+.trackerSub {
+  font-size: 0.82rem;
+  color: rgba(255, 255, 255, 0.5);
+  margin-bottom: 2rem;
+}
+
+.trackerSteps {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+}
+
+.trackerStep {
+  display: flex;
+  gap: 1rem;
+  align-items: flex-start;
+}
+
+.stepLeft {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  min-width: 40px;
+}
+
+.stepDot {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.1rem;
+  border: 2px solid rgba(255, 255, 255, 0.1);
+  background: #1a1a1a;
+  flex-shrink: 0;
+  opacity: 0;
+  transform: scale(0.5);
+}
+
+/* each dot animates in with delay */
+.stepDot0 { animation: dotIn 0.4s cubic-bezier(0.22,1,0.36,1) 0.2s forwards; }
+.stepDot1 { animation: dotIn 0.4s cubic-bezier(0.22,1,0.36,1) 0.9s forwards; }
+.stepDot2 { animation: dotIn 0.4s cubic-bezier(0.22,1,0.36,1) 1.6s forwards; }
+.stepDot3 { animation: dotIn 0.4s cubic-bezier(0.22,1,0.36,1) 2.3s forwards; }
+
+@keyframes dotIn {
+  to {
+    opacity: 1;
+    transform: scale(1);
+    border-color: #4ade80;
+    background: rgba(74, 222, 128, 0.12);
+  }
+}
+
+.stepIcon { font-size: 1.1rem; }
+
+.stepLine {
+  width: 2px;
+  height: 36px;
+  background: rgba(255, 255, 255, 0.08);
+  margin: 2px 0;
+  position: relative;
+  overflow: hidden;
+}
+
+.stepLine::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 0%;
+  background: #4ade80;
+  border-radius: 999px;
+}
+
+/* each line fills after its dot */
+.stepLine0::after { animation: fillLine 0.5s ease 0.6s forwards; }
+.stepLine1::after { animation: fillLine 0.5s ease 1.3s forwards; }
+.stepLine2::after { animation: fillLine 0.5s ease 2.0s forwards; }
+
+@keyframes fillLine {
+  to { height: 100%; }
+}
+
+.stepRight {
+  padding-bottom: 1.5rem;
+}
+
+.stepLabel {
+  font-size: 0.9rem;
+  font-weight: 700;
+  color: rgba(255, 255, 255, 0.3);
+  margin-bottom: 2px;
+  transition: color 0.3s;
+}
+
+/* labels light up as steps activate */
+.stepLabel0 { animation: labelOn 0.3s ease 0.2s forwards; }
+.stepLabel1 { animation: labelOn 0.3s ease 0.9s forwards; }
+.stepLabel2 { animation: labelOn 0.3s ease 1.6s forwards; }
+.stepLabel3 { animation: labelOn 0.3s ease 2.3s forwards; }
+
+@keyframes labelOn {
+  to { color: #fff; }
+}
+
+.stepSub {
+  font-size: 0.75rem;
+  color: rgba(255, 255, 255, 0.4);
+}
+
+.trackerClose {
+  margin-top: auto;
+  width: 100%;
+  background: #4ade80;
+  color: #000;
+  border: none;
+  padding: 0.85rem;
+  border-radius: 999px;
+  font-size: 1rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: background 0.2s;
+  animation: fadeIn 0.4s ease 2.8s both;
+}
+
+.trackerClose:hover { background: #22c55e; }
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to   { opacity: 1; transform: translateY(0); }
+}

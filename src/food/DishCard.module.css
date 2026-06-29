@@ -9,6 +9,8 @@
   overflow: visible;
   transition: transform 0.25s, box-shadow 0.25s;
   cursor: pointer;
+scroll-snap-align: start;
+flex-shrink: 0;
 }
 
 .card:hover {
@@ -50,6 +52,7 @@
 }
 
 .card:hover .img { transform: scale(1.08); }
+
 
 .rating {
   display: flex;
