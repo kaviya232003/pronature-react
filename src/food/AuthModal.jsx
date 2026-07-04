@@ -12,30 +12,34 @@ export default function AuthModal({ onSuccess }) {
     setError('');
   };
 
-  const handleSubmit = () => {
+  const handleSubmit = async () => {
     const { name, email, password } = form;
-    const users = JSON.parse(localStorage.getItem('pn_users') || '[]');
-
     if (!email || !password) return setError('Please fill all fields.');
     if (mode === 'register' && !name) return setError('Please enter your name.');
 
     setLoading(true);
-    setTimeout(() => {
-      if (mode === 'register') {
-        const exists = users.find(u => u.email === email);
-        if (exists) { setError('Email already registered.'); setLoading(false); return; }
-        const newUser = { name, email, password };
-        localStorage.setItem('pn_users', JSON.stringify([...users, newUser]));
-        localStorage.setItem('pn_current', JSON.stringify(newUser));
-        onSuccess(newUser);
-      } else {
-        const user = users.find(u => u.email === email && u.password === password);
-        if (!user) { setError('Invalid email or password.'); setLoading(false); return; }
-        localStorage.setItem('pn_current', JSON.stringify(user));
-        onSuccess(user);
+    try {
+      const endpoint = mode === 'register' ? 'register' : 'login';
+      const res = await fetch(`http://localhost:5000/api/users/${endpoint}`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ name, email, password }),
+      });
+      const data = await res.json();
+
+      if (!res.ok) {
+        setError(data.message);
+        setLoading(false);
+        return;
       }
-      setLoading(false);
-    }, 800);
+
+      localStorage.setItem('pn_token', data.token);
+      localStorage.setItem('pn_current', JSON.stringify(data.user));
+      onSuccess(data.user);
+    } catch (err) {
+      setError('Could not connect to server. Make sure backend is running.');
+    }
+    setLoading(false);
   };
 
   return (

@@ -22,7 +22,6 @@ export default function MenuSection() {
     ? menuItems
     : menuItems.filter((item) => item.category === activeTab);
 
-  // Check scroll position to show/hide arrows
   const checkScroll = () => {
     const el = rowRef.current;
     if (!el) return;
@@ -38,7 +37,6 @@ export default function MenuSection() {
     return () => el.removeEventListener('scroll', checkScroll);
   }, [filtered]);
 
-  // Auto scroll every 3 seconds
   useEffect(() => {
     autoScrollRef.current = setInterval(() => {
       const el = rowRef.current;
@@ -58,7 +56,6 @@ export default function MenuSection() {
     rowRef.current?.scrollBy({ left: dir * 320, behavior: 'smooth' });
   };
 
-  // Drag to scroll
   const onMouseDown = (e) => {
     setIsDragging(true);
     setStartX(e.pageX - rowRef.current.offsetLeft);
@@ -92,6 +89,21 @@ export default function MenuSection() {
 
   return (
     <section className={styles.section} id="menu">
+
+      <div className={styles.cloudLayer} aria-hidden="true">
+        <svg className={`${styles.cloud} ${styles.cloudLeft}`} viewBox="0 0 200 120" xmlns="http://www.w3.org/2000/svg">
+          <ellipse cx="60" cy="70" rx="45" ry="28" fill="#fff" />
+          <ellipse cx="100" cy="55" rx="55" ry="35" fill="#fff" />
+          <ellipse cx="145" cy="72" rx="40" ry="26" fill="#fff" />
+          <ellipse cx="100" cy="80" rx="70" ry="24" fill="#fff" />
+        </svg>
+        <svg className={`${styles.cloud} ${styles.cloudRight}`} viewBox="0 0 200 120" xmlns="http://www.w3.org/2000/svg">
+          <ellipse cx="55" cy="65" rx="40" ry="25" fill="#fff" />
+          <ellipse cx="100" cy="50" rx="50" ry="32" fill="#fff" />
+          <ellipse cx="140" cy="68" rx="36" ry="24" fill="#fff" />
+          <ellipse cx="95" cy="76" rx="65" ry="22" fill="#fff" />
+        </svg>
+      </div>
 
       {showAuth && <AuthModal onSuccess={handleAuthSuccess} />}
 

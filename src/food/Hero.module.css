@@ -58,22 +58,21 @@
 
   /* Content */
   .content {
-    position: relative;
-    z-index: 2;
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-    text-align: left;
-    width: 100%;
-    max-width: 1100px;
-    padding: 0 5rem;
-  }
-
+  position: relative;
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  text-align: left;
+  width: 100%;
+  max-width: 1400px;
+  padding: 0 5rem;
+}
   /* Fade up animation */
   .fadeUp {
     opacity: 0;
     transform: translateY(30px);
-    transition: opacity 0.8s ease, transform 0.8s ease;
+    transition: opacity 1s ease, transform 0.8s ease;
   }
 
   .fadeUpVisible {
@@ -103,7 +102,7 @@
 
   /* Main heading */
   .heading {
-    font-size: clamp(3.5rem, 7.5vw, 7rem);
+    font-size: clamp(3.5rem, 4.5vw, 7rem);
     font-weight: 900;
     line-height: 1.0;
     color: #fff;

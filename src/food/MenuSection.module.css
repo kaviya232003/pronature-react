@@ -2,6 +2,55 @@
   background: #1a1208;
   padding: 70px 0 80px;
   overflow: hidden;
+  position: relative;
+}
+
+.section > *:not(.cloudLayer) {
+  position: relative;
+  z-index: 1;
+}
+
+.cloudLayer {
+  position: absolute;
+  inset: 0;
+  z-index: 3;
+  pointer-events: none;
+  overflow: hidden;
+}
+
+.cloud {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 260px;
+  
+  mix-blend-mode: screen;
+}
+
+.cloudLeft {
+  width: 600px;
+  animation: driftLeft 14s ease-in-out infinite;
+}
+
+.cloudRight {
+  width: 600px;
+  animation: driftRight 14s ease-in-out infinite;
+}
+
+@keyframes driftLeft {
+  0%   { transform: translate(-50%, -50%) translateX(0); opacity: 0; }
+  10%  { opacity: 0.6; }
+  50%  { transform: translate(-50%, -50%) translateX(-70vw); opacity: 0.6; }
+  90%  { opacity: 0; }
+  100% { transform: translate(-50%, -50%) translateX(-70vw); opacity: 0; }
+}
+
+@keyframes driftRight {
+  0%   { transform: translate(-50%, -50%) translateX(0); opacity: 0; }
+  10%  { opacity: 0.6; }
+  50%  { transform: translate(-50%, -50%) translateX(70vw); opacity: 0.6; }
+  90%  { opacity: 0; }
+  100% { transform: translate(-50%, -50%) translateX(70vw); opacity: 0; }
 }
 
 /* Header */
@@ -191,4 +240,7 @@
 
   .row { padding: 16px 24px 32px; }
   .arrowGroup { align-self: flex-end; }
+
+  .cloud { width: 2000px; }
+  .cloudRight { width: 2100px; }
 }

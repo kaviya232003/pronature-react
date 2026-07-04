@@ -74,23 +74,40 @@ export default function TableBooking() {
     setShowModal(true);
   };
 
-  const handleBook = () => {
-    if (!form.name || !form.phone || !selectedDate || !selectedTime) return;
-    const key = getBookingKey(selectedTable.id, selectedDate, selectedTime);
-    setBookings(prev => ({
-      ...prev,
-      [key]: {
+const handleBook = async () => {
+  if (!form.name || !form.phone || !selectedDate || !selectedTime) return;
+
+  try {
+    await fetch('http://localhost:5000/api/bookings', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
         tableId: selectedTable.id,
         tableName: selectedTable.name,
         date: selectedDate,
         time: selectedTime,
         ...form,
-      }
-    }));
-    setShowModal(false);
-    setShowSuccess(true);
-    setTimeout(() => setShowSuccess(false), 3000);
-  };
+      }),
+    });
+  } catch (err) {
+    console.error('Failed to save booking:', err);
+  }
+
+  const key = getBookingKey(selectedTable.id, selectedDate, selectedTime);
+  setBookings(prev => ({
+    ...prev,
+    [key]: {
+      tableId: selectedTable.id,
+      tableName: selectedTable.name,
+      date: selectedDate,
+      time: selectedTime,
+      ...form,
+    }
+  }));
+  setShowModal(false);
+  setShowSuccess(true);
+  setTimeout(() => setShowSuccess(false), 3000);
+};
 
   const handleCancel = (key) => {
     setBookings(prev => {

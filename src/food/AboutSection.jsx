@@ -21,12 +21,12 @@ export default function AboutSection() {
           </div>
           <img
             className={styles.imgMain}
-            src="https://images.unsplash.com/photo-1556909114-f6e7ad7d3136?w=600&q=80"
+            src="chef image.jpg"
             alt="Chef cooking"
           />
           <img
             className={styles.imgFloat}
-            src="https://images.unsplash.com/photo-1414235077428-338989a2e8c0?w=300&q=80"
+            src="chef image.jpg"
             alt="Restaurant interior"
           />
         </div>

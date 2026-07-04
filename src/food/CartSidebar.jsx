@@ -41,19 +41,35 @@ export default function CartSidebar() {
     return e;
   };
 
-  const handlePlaceOrder = () => {
-    const e = validate();
-    if (Object.keys(e).length > 0) { setErrors(e); return; }
-     placeOrder({ name: form.name, address: form.address });
-    setShowCheckout(false);
-    setPlaced(true);
-    setForm(INITIAL_FORM);
-    setTimeout(() => {
-      setPlaced(false);
-      clearCart();
-      closeCart();
-    }, 2500);
-  };
+  const handlePlaceOrder = async () => {
+  const e = validate();
+  if (Object.keys(e).length > 0) { setErrors(e); return; }
+
+  try {
+    await fetch('http://localhost:5000/api/orders', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        items,
+        total: totalPrice + 3.5,
+        customer: form,
+        userEmail: JSON.parse(localStorage.getItem('pn_current') || '{}').email,
+      }),
+    });
+  } catch (err) {
+    console.error('Failed to save order:', err);
+  }
+
+  placeOrder({ name: form.name, address: form.address });
+  setShowCheckout(false);
+  setPlaced(true);
+  setForm(INITIAL_FORM);
+  setTimeout(() => {
+    setPlaced(false);
+    clearCart();
+    closeCart();
+  }, 2500);
+};
 
   return (
     <>
