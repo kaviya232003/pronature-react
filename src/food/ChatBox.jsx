@@ -97,7 +97,7 @@ const formatText = (text) => {
 };
 
 export default function ChatBox() {
-  const [open, setOpen] = useState(false);
+  const [open, setOpen] = useState(true);
   const [messages, setMessages] = useState([
     {
       role: 'assistant',
